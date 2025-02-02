@@ -2,7 +2,7 @@ import argparse
 import json
 import os
 import re
-import random
+import secrets
 
 
 def get_args():
@@ -33,7 +33,7 @@ def get_pred_idx(prediction, choices, options):
         return options.index(prediction)
     else:
         return -1
-        return random.choice(range(len(choices)))
+        return secrets.choice(range(len(choices)))
 
 
 if __name__ == "__main__":
