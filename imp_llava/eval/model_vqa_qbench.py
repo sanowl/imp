@@ -10,15 +10,14 @@ from imp_llava.utils import disable_torch_init
 from imp_llava.mm_utils import tokenizer_image_token, get_model_name_from_path, KeywordsStoppingCriteria
 
 from PIL import Image
-
-import requests
 from PIL import Image
 from io import BytesIO
+from security import safe_requests
 
 
 def load_image(image_file):
     if image_file.startswith('http') or image_file.startswith('https'):
-        response = requests.get(image_file)
+        response = safe_requests.get(image_file)
         image = Image.open(BytesIO(response.content)).convert('RGB')
     else:
         image = Image.open(image_file).convert('RGB')
