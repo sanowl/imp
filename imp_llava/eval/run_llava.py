@@ -19,11 +19,10 @@ from imp_llava.mm_utils import (
 )
 
 from PIL import Image
-
-import requests
 from PIL import Image
 from io import BytesIO
 import re
+from security import safe_requests
 
 
 def image_parser(args):
@@ -33,7 +32,7 @@ def image_parser(args):
 
 def load_image(image_file):
     if image_file.startswith("http") or image_file.startswith("https"):
-        response = requests.get(image_file)
+        response = safe_requests.get(image_file)
         image = Image.open(BytesIO(response.content)).convert("RGB")
     else:
         image = Image.open(image_file).convert("RGB")
